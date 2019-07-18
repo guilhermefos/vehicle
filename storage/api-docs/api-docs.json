@@ -1,0 +1,493 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "VEHICLE API",
+        "description": "Vehicle API",
+        "contact": {
+            "email": "guilhermefos.developer@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/api/v1/",
+            "description": "Localhost"
+        }
+    ],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Log the user in and returns the access token",
+                "description": "Log the user in and returns the access token",
+                "operationId": "login",
+                "parameters": [
+                    {
+                        "name": "X-Requested-With",
+                        "in": "header",
+                        "description": "Type XMLHttpRequest as value to this field",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "email": "user@email.com",
+                                    "password": "secret"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Log the user out",
+                "description": "Log the user out",
+                "operationId": "logout",
+                "parameters": [
+                    {
+                        "name": "X-Requested-With",
+                        "in": "header",
+                        "description": "Type XMLHttpRequest as value to this field",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "405": {
+                        "description": "Method Not Allowed"
+                    },
+                    "500": {
+                        "description": "Unable to process request"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "tags": [
+                    "Registration"
+                ],
+                "summary": "Register a new User",
+                "description": "Register a new User",
+                "operationId": "register",
+                "parameters": [
+                    {
+                        "name": "X-Requested-With",
+                        "in": "header",
+                        "description": "Type XMLHttpRequest as value to this field",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string"
+                                    },
+                                    "role_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "User Full Name",
+                                    "email": "user@email.com",
+                                    "role_id": 1,
+                                    "password": "secret",
+                                    "password_confirmation": "secret"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Unable to process request"
+                    }
+                }
+            }
+        },
+        "/vehicle": {
+            "get": {
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "List all vehicles from a user",
+                "description": "List all vehicles from a user",
+                "operationId": "vehicle",
+                "parameters": [
+                    {
+                        "name": "X-Requested-With",
+                        "in": "header",
+                        "description": "Type XMLHttpRequest as value to this field",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "500": {
+                        "description": "Unable to process list request"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/vehicle/store": {
+            "post": {
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "Register a new Vehicle",
+                "description": "Register a new Vehicle",
+                "operationId": "vehicle",
+                "parameters": [
+                    {
+                        "name": "X-Requested-With",
+                        "in": "header",
+                        "description": "Type XMLHttpRequest as value to this field",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "brand": {
+                                        "type": "string"
+                                    },
+                                    "chassis": {
+                                        "type": "string"
+                                    },
+                                    "color": {
+                                        "type": "string"
+                                    },
+                                    "model": {
+                                        "type": "string"
+                                    },
+                                    "year": {
+                                        "type": "string"
+                                    },
+                                    "plate": {
+                                        "type": "string"
+                                    },
+                                    "renavam": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "brand": "Fiat",
+                                    "chassis": "9BUSU19F08B302158",
+                                    "color": "Vermelho",
+                                    "model": "Tempra 8V/ City 8V",
+                                    "year": "2019-07-17 22:35:00",
+                                    "plate": "HAC-0866",
+                                    "renavam": "49312760291"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Unable to process create request"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/vehicle/update": {
+            "put": {
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "Update a storage Vehicle",
+                "description": "Update a storage Vehicle",
+                "operationId": "vehicle",
+                "parameters": [
+                    {
+                        "name": "X-Requested-With",
+                        "in": "header",
+                        "description": "Type XMLHttpRequest as value to this field",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "brand": {
+                                        "type": "string"
+                                    },
+                                    "chassis": {
+                                        "type": "string"
+                                    },
+                                    "color": {
+                                        "type": "string"
+                                    },
+                                    "model": {
+                                        "type": "string"
+                                    },
+                                    "year": {
+                                        "type": "string"
+                                    },
+                                    "plate": {
+                                        "type": "string"
+                                    },
+                                    "renavam": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "brand": "Palio",
+                                    "chassis": "9BUSU19F08B302158",
+                                    "color": "Vermelho",
+                                    "model": "Tempra 8V/ City 8V",
+                                    "year": "2019-07-17 22:35:00",
+                                    "plate": "HAC-0866",
+                                    "renavam": "49312760291"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated"
+                    },
+                    "500": {
+                        "description": "Unable to process update request"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/vehicle/destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "Delete a Vehicle",
+                "description": "Delete a Vehicle",
+                "operationId": "vehicle",
+                "parameters": [
+                    {
+                        "name": "X-Requested-With",
+                        "in": "header",
+                        "description": "Type XMLHttpRequest as value to this field",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the vehicle that needs to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "minimum": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted"
+                    },
+                    "500": {
+                        "description": "Unable to process delete request"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "properties": {
+                    "name": {
+                        "description": "The user name",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "The user email",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "The user password",
+                        "type": "string"
+                    },
+                    "role_id": {
+                        "description": "The user role id",
+                        "type": "int"
+                    }
+                },
+                "type": "object"
+            },
+            "Vehicle": {
+                "properties": {
+                    "user_id": {
+                        "description": "The vehicle user id",
+                        "type": "int"
+                    },
+                    "brand": {
+                        "description": "The vehicle brand",
+                        "type": "string"
+                    },
+                    "chassis": {
+                        "description": "The vehicle chassis",
+                        "type": "string"
+                    },
+                    "color": {
+                        "description": "The vehicle color",
+                        "type": "string"
+                    },
+                    "model": {
+                        "description": "The vehicle model",
+                        "type": "string"
+                    },
+                    "year": {
+                        "description": "The vehicle year",
+                        "type": "string"
+                    },
+                    "plate": {
+                        "description": "The vehicle plate",
+                        "type": "string"
+                    },
+                    "renavam": {
+                        "description": "The vehicle renavam",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "api_key": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}
