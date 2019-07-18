@@ -26,14 +26,14 @@ To be able to run the project in the local environment please follow these steps
 1. Run `php artisan db:seed`
 1. Run `php artisan passport:install`
 
+## Running the API tests endpoints
+
+Access http://[YOURDOMAIN]/api/documentation
+
 ## Built With
 
 * [Laravel](https://laravel.com/docs/5.8) - The api framework used
 * [Swagger](https://swagger.io/docs/) - Dependency Management
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
