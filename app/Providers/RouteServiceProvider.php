@@ -12,9 +12,9 @@ class RouteServiceProvider extends ServiceProvider
      *
      * In addition, it is set as the URL generator's root namespace.
      *
-     * @var string
+     * @var array
      */
-    protected $namespace = 'App\Http\Controllers';
+    protected $namespace = ['App\Http\Controllers', 'App\Http\Controllers\Api'];
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -52,7 +52,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::middleware('web')
-             ->namespace($this->namespace)
+             ->namespace($this->namespace[0])
              ->group(base_path('routes/web.php'));
     }
 
@@ -67,7 +67,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('api')
              ->middleware('api')
-             ->namespace($this->namespace)
+             ->namespace($this->namespace[1])
              ->group(base_path('routes/api.php'));
     }
 }
